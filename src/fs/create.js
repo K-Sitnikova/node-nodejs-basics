@@ -1,5 +1,4 @@
-import {writeFile} from "fs/promises"
-import { existsSync } from "fs";
+import { existsSync, writeFile } from "fs";
 import { join, dirname } from "path"; 
 import { fileURLToPath } from "url";
 
@@ -13,11 +12,11 @@ const create = async () => {
         throw new Error('FS operation failed')
     }
 
-    try {
-        await writeFile(filePath, text);
-    } catch (error) {
-        console.error("Error writing file:", error);
-    }
+    writeFile(filePath, text, (err) => {
+        if (err) {
+            console.log(err);
+        }
+    });
 };
 
 await create();

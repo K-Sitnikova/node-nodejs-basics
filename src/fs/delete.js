@@ -1,4 +1,4 @@
-import {existsSync, unlinkSync } from "fs";
+import {existsSync, unlink } from "fs";
 import { dirname, join } from "path"; 
 import { fileURLToPath } from "url";
 
@@ -12,7 +12,12 @@ const remove = async () => {
         throw new Error('FS operation failed')
     }
 
-    unlinkSync(fileToDelete)
+    unlink(fileToDelete, (err) => {
+        if (err) {
+            console.log(err)
+            return
+        }
+    })
 };
 
 await remove();

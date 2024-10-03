@@ -14,7 +14,12 @@ const rename = async () => {
         throw new Error('FS operation failed')
     }
 
-    fs.renameSync(oldfilePath, newFilePath)
+    fs.rename(oldfilePath, newFilePath, (err) => {
+        if (err) {
+            console.log(err)
+            return
+        }
+    })
 };
 
 await rename();

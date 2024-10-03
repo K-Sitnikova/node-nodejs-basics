@@ -1,4 +1,4 @@
-import {existsSync, readFileSync } from "fs";
+import {existsSync, readFile } from "fs";
 import { dirname, join } from "path"; 
 import { fileURLToPath } from "url";
 
@@ -12,8 +12,15 @@ const read = async () => {
         throw new Error('FS operation failed')
     }
 
-    const textFromFile = readFileSync(fileForRead, 'utf-8')
-    console.log(textFromFile)
+    readFile(fileForRead, {encoding: 'utf-8'}, (err, data) => {
+        if (err) {
+            console.log(err)
+            return
+        } else {
+            console.log(data)
+        }
+    })
+    
 };
 
 await read();
